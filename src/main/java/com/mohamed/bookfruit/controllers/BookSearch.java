@@ -17,12 +17,12 @@ public class BookSearch {
     @RequestMapping(value = "" , method = RequestMethod.GET)
     public String displaySearchForm(Model model){
         model.addAttribute("title", "Search for a book by title or isbn");
-        return "search/search";
+        return "search/index";
     }
 
     @RequestMapping(value = "" , method = RequestMethod.POST)
     public String processSearchForm(Model model, @RequestParam String search){
-        return "search/search";
+        return "search/index";
     }
 
 }
