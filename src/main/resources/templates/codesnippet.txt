@@ -1,0 +1,84 @@
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String displayAddCheeseForm(Model model) {
+        model.addAttribute("title", "Add Cheese");
+        model.addAttribute(new Cheese());
+        model.addAttribute("categories", categoryDao.findAll());
+        return "cheese/add";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
+                                       Errors errors, Model model, @RequestParam int categoryId) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Cheese");
+            return "cheese/add";
+        }
+        Category category = categoryDao.findOne(categoryId);
+        newCheese.setCategory(category);
+        cheeseDao.save(newCheese);
+        return "redirect:";
+    }
+
+    <div class="form-group">
+            <label th:for="isbn13">ISBN: </label>
+            <span class="form-control" id="isbn13" th:field="*{isbn13}" ></span>
+            <span th:errors="*{isbn13}" class="error"></span>
+        </div>
+
+
+        th:object="${cheese}">
+            <div class="form-group">
+                <label th:for="name">Name</label>
+                <input class="form-control" th:field="*{name}" />
+                <span th:errors="*{name}" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label th:for="description">Description</label>
+                <input class="form-control" th:field="*{description}" />
+                <span th:errors="*{description}" class="error"></span>
+            </div>
+
+
+<head th:replace="fragments :: head"></head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">My Cheeses</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav th:fragment="navigation">
+    <a href="/cheese">List</a> |
+    <a href="/category">Category</a> |
+    <a href="/menu">Menu</a>
+
+</nav>
+
+</body>
+</html>
+
+Iterable<String> result = ... //result returned from some method.
+Iterator<String> iter = result.iterator();
+while(iter.hasNext()){
+	System.out.println(iter.next());
+}
+//        Iterable<Author> authors = authorDao.findAll();
+//        Iterator<Author> iter = authors.iterator();
+//        while(iter.hasNext()){
+//            if(iter.next().getName().equals(authorname)){
+//                author = iter.next();
+//            }
+//        }
+//        if(author == null){
+//            author = new Author(authorname);
+//        }
+
+th:text="${cheese.name}"

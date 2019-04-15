@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Title</title>
+    </head>
+    <body>
+        <div>
+            <img th:src="@{${book.image}}"><br/>
+            <label>Book Title: <h1 th:text="${book.title}">Book Title</h1></label>
+            <label>Author: <h2 th:text="${book.author.name}">Author</h2></label>
+            <label>ISBN: <h3 th:text="${book.isbn13}">Isbn #</h3></label>
+        </div>
+
+<form >
+    <h1>Chapter Titles</h1>
+    <label>Enter chapter names</label>
+</form>
+
+    </body>
+</html>

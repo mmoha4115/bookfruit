@@ -16,8 +16,10 @@ import java.util.List;
 public class Book {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @NotNull
+    @Size(min = 9,max = 20)
+    @ISBN
+    private String isbn13;
 
     @NotNull
     @Size(min = 1)
@@ -30,30 +32,22 @@ public class Book {
     @Size(min = 1)
     private String image;
 
-    @NotNull
-    @Size(min = 9,max = 20)
-    @ISBN
-    private String isbn;
+
 
     @OneToMany
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_isbn13")
     private List<Chapter> chapters;
 
-    public Book(String title,Author author, String image, String isbn){
+    public Book(String title,String image, String isbn13){
         this.title = title;
-        this.author = author;
         this.image = image;
-        this.isbn = isbn;
+        this.isbn13 = isbn13;
     }
 
     public Book(){
 
     }
 
-
-    public int getId() {
-        return id;
-    }
 
     public String getTitle() {
         return title;
@@ -79,12 +73,12 @@ public class Book {
         this.image = image;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getIsbn13() {
+        return isbn13;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setIsbn13(String isbn13) {
+        this.isbn13 = isbn13;
     }
 
     public void addChapter(Chapter chapter){

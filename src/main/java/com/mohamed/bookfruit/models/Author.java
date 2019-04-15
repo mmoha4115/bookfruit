@@ -12,16 +12,16 @@ import java.util.List;
 @Entity
 public class Author {
 
-    @Id
     @GeneratedValue
     private int id;
 
+    @Id
     @NotNull
     @Size(min = 1)
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_name")
     private List<Book> books;
 
     public Author(String name){
