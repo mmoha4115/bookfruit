@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Mohamed Mohamed
@@ -14,6 +15,11 @@ import java.util.List;
 
 @Entity
 public class Book {
+
+    @Column(unique = true)
+    @GeneratedValue
+    private int id;
+
 
     @Id
     @NotNull
@@ -89,4 +95,25 @@ public class Book {
         chapters.remove(chapter);
     }
 
+    public List<Chapter> getChapters(){
+        return chapters;
+    }
+
+    private int getId() {
+        return id;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return getIsbn13().equals(book.getIsbn13());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getIsbn13());
+    }
 }

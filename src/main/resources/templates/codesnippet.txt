@@ -82,3 +82,14 @@ while(iter.hasNext()){
 //        }
 
 th:text="${cheese.name}"
+
+//        for (Book aBook : bookDao.findAll()){
+//            if(aBook.equals(newBook)){
+//                if(aBook.getChapters().size() > 2){
+//                    model.addAttribute(aBook);
+//                    return "search/bookview";
+//                }else {
+//                    return displayAddChapterForm(model,aBook);
+//                }
+//            }
+//        }

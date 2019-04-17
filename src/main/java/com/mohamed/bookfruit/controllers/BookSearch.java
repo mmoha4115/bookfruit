@@ -2,8 +2,10 @@ package com.mohamed.bookfruit.controllers;
 
 import com.mohamed.bookfruit.models.Author;
 import com.mohamed.bookfruit.models.Book;
+import com.mohamed.bookfruit.models.Chapter;
 import com.mohamed.bookfruit.models.data.AuthorDao;
 import com.mohamed.bookfruit.models.data.BookDao;
+import com.mohamed.bookfruit.models.data.ChapterDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Mohamed Mohamed
@@ -30,7 +31,8 @@ public class BookSearch {
     private BookDao bookDao;
     @Autowired
     private AuthorDao authorDao;
-
+    @Autowired
+    private ChapterDao chapterDao;
 
     @RequestMapping(value = "" , method = RequestMethod.GET)
     public String displaySearchForm(Model model){
@@ -47,12 +49,41 @@ public class BookSearch {
             model.addAttribute("title","Search for a book by isbn #");
             return "search/index";
         }
-        Author author=new Author(authorname);
-        authorDao.save(author);
-        newBook.setAuthor(author);
+        Author newAuthor=new Author(authorname);
+        for(Author anAuthor: authorDao.findAll()){
+            if(anAuthor.equals(newAuthor)){
+                newAuthor = anAuthor;
+            }
+        }
+        authorDao.save(newAuthor);
+        newBook.setAuthor(newAuthor);
+
+        for (Book aBook : bookDao.findAll()){
+            if(aBook.equals(newBook)){
+                newBook = aBook;
+                if(aBook.getChapters().size() > 2){
+                    model.addAttribute(aBook);
+                    return "search/bookview";
+                }else { return displayAddChapterForm(model,aBook); }
+            }
+        }
         bookDao.save(newBook);
-        model.addAttribute("book",newBook);
-        return "search/addChapters";
+        return displayAddChapterForm(model,newBook);
+    }
+
+
+    @RequestMapping(value = "/addchapters" , method=RequestMethod.GET)
+    public String displayAddChapterForm(Model model,Book aBook){
+//        System.out.println(aBook.getChapters().size() + " : this is the size...");
+        model.addAttribute(aBook);
+        return "search/addchapters";
+    }
+
+    @RequestMapping(value = "/addchapters" , method = RequestMethod.POST)
+    public String processAddChaptersForm(Model model, @RequestParam List<String> chapternames){
+
+
+        return "search/bookview";
     }
 
 }

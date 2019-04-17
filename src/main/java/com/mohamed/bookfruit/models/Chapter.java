@@ -16,6 +16,7 @@ public class Chapter {
     @GeneratedValue
     private int id;
 
+
     @NotNull
     @Size(min = 1)
     private String name;
@@ -62,6 +63,10 @@ public class Chapter {
 
     public void removeFruit(Fruit fruit){
         fruits.remove(fruit);
+    }
+
+    public List<Fruit> getFruits(){
+        return fruits;
     }
 
 

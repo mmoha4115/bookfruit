@@ -1,9 +1,6 @@
 package com.mohamed.bookfruit.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -18,6 +15,7 @@ public class Fruit {
     @Id
     @GeneratedValue
     private int id;
+
 
     @NotNull
     @Size(min=1)
@@ -54,5 +52,6 @@ public class Fruit {
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
     }
+
 
 }
