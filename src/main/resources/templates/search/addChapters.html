@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Title</title>
-    </head>
-    <body>
+<head th:replace="fragments :: head"></head>
+
+<body>
         <div>
             <img th:src="@{${book.image}}"><br/>
             <label>Book Title: <h1 th:text="${book.title}">Book Title</h1></label>
             <label>Author: <h2 th:text="${book.author.name}">Author</h2></label>
             <label>ISBN: <h3 th:text="${book.isbn13}">Isbn #</h3></label>
         </div>
-    <div>
-        <form >
 
-            <h1>Chapter Titles</h1>
-            <label>Enter chapter names</label>
+        <form method="post">
+
+            <h1 class="center">Enter chapter names</h1>
+
+            <table id="addedRows">
+
+                <tr>
+                    <th>Chapter Title</th>
+                    <th><a id="addMoreChapters" href="javascript:void(0);" /> Add A Chapter</a></th>
+                </tr>
+
+
+                <tr class="row1">
+                    <td><input name="chapters" size="75%" type="text"  /></td>
+                    <!--<td><button id='row1' onclick='delete(this.id)' formaction='javascript:void(0);' >Delete</button></td></tr>-->
+                </tr>
+                <br/>
+
+            </table>
+            <br />
+
+            <input type="submit" value="Submit" />
         </form>
 
-        </div>
 
+
+        <script >
+            var count = 1;
+
+            $("#addMoreChapters").click(function(){
+            count++;
+            var addrow = "<tr class='row"+count+"'><td><input name='chapters' size='75%'' type='text'  /></td></tr><br/>";
+<!--<td><button id='row"+count+"' onclick='delete(this.id)' formaction='javascript:void(0);' >Delete</button></td></tr>-->
+            $("table#addedRows").append(addrow);
+            });
+
+            <!--function delete(id){$("."+id).remove();};-->
+
+
+        </script>
 
     </body>
 </html>

@@ -3,6 +3,7 @@ package com.mohamed.bookfruit.controllers;
 import com.mohamed.bookfruit.models.Author;
 import com.mohamed.bookfruit.models.Book;
 import com.mohamed.bookfruit.models.Chapter;
+import com.mohamed.bookfruit.models.data.AidFunctions;
 import com.mohamed.bookfruit.models.data.AuthorDao;
 import com.mohamed.bookfruit.models.data.BookDao;
 import com.mohamed.bookfruit.models.data.ChapterDao;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,6 +25,7 @@ import java.util.Optional;
 @RequestMapping(value = "search")
 public class BookSearch {
 
+    AidFunctions aidFunctions = new AidFunctions();
     @Autowired
     private BookDao bookDao;
     @Autowired
@@ -58,31 +57,43 @@ public class BookSearch {
         authorDao.save(newAuthor);
         newBook.setAuthor(newAuthor);
 
-        for (Book aBook : bookDao.findAll()){
-            if(aBook.equals(newBook)){
-                newBook = aBook;
-                if(aBook.getChapters().size() > 2){
-                    model.addAttribute(aBook);
+        for (Book aBook : bookDao.findAll()) {
+            if (aBook.equals(newBook)) {
+                if (aBook.getChapters().size() > 1) {
+                    model.addAttribute("book", aBook);
                     return "search/bookview";
-                }else { return displayAddChapterForm(model,aBook); }
+                } if (aBook.getChapters().size()<1){
+                    int id = aBook.getId();
+                    return "redirect:search/addchapters/"+id;
+                }
             }
         }
         bookDao.save(newBook);
-        return displayAddChapterForm(model,newBook);
+        int id = newBook.getId();
+        return "redirect:addchapters/"+id;
     }
 
 
-    @RequestMapping(value = "/addchapters" , method=RequestMethod.GET)
-    public String displayAddChapterForm(Model model,Book aBook){
-//        System.out.println(aBook.getChapters().size() + " : this is the size...");
-        model.addAttribute(aBook);
-        return "search/addchapters";
+    @RequestMapping(value = "addchapters/{id}" , method=RequestMethod.GET)
+    public String displayAddChapterForm(Model model, @PathVariable int id){
+        model.addAttribute("book",bookDao.findById(id).get());
+        return "search/addChapters";
     }
 
-    @RequestMapping(value = "/addchapters" , method = RequestMethod.POST)
-    public String processAddChaptersForm(Model model, @RequestParam List<String> chapternames){
+    @RequestMapping(value = "addchapters/{id}" , method = RequestMethod.POST)
+    public String processAddChaptersForm(Model model, @RequestParam List<String> chapters, @PathVariable int id){
 
+        Book currentBook = bookDao.findById(id).get();
+        for(String chapter : chapters){
+            if (!chapter.isEmpty()){
+                Chapter chapter1 = new Chapter(chapter,currentBook);
+                chapterDao.save(chapter1);
+                currentBook.addChapter(chapter1);
+            }
+        }
 
+        bookDao.save(currentBook);
+        model.addAttribute("book",currentBook);
         return "search/bookview";
     }
 

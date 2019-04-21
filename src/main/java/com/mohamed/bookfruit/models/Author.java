@@ -12,11 +12,11 @@ import java.util.Objects;
 
 @Entity
 public class Author {
-    @Column(unique = true)
+    @Id
     @GeneratedValue
     private int id;
 
-    @Id
+
     @NotNull
     @Size(min = 1)
     private String name;

@@ -16,12 +16,12 @@ import java.util.Objects;
 @Entity
 public class Book {
 
-    @Column(unique = true)
+    @Id
     @GeneratedValue
     private int id;
 
 
-    @Id
+
     @NotNull
     @Size(min = 9,max = 20)
     @ISBN
@@ -41,7 +41,7 @@ public class Book {
 
 
     @OneToMany
-    @JoinColumn(name = "book_isbn13")
+    @JoinColumn(name = "book_id")
     private List<Chapter> chapters;
 
     public Book(String title,String image, String isbn13){
@@ -99,10 +99,13 @@ public class Book {
         return chapters;
     }
 
-    private int getId() {
+    public int getId() {
         return id;
     }
 
+    private void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
