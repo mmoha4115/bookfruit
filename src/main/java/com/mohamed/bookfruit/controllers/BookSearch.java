@@ -61,7 +61,7 @@ public class BookSearch {
             if (aBook.equals(newBook)) {
                 if (aBook.getChapters().size() > 1) {
                     model.addAttribute("book", aBook);
-                    return "search/bookview";
+                    return "redirect:/book/"+aBook.getId();
                 } if (aBook.getChapters().size()<1){
                     int id = aBook.getId();
                     return "redirect:search/addchapters/"+id;
@@ -70,7 +70,7 @@ public class BookSearch {
         }
         bookDao.save(newBook);
         int id = newBook.getId();
-        return "redirect:addchapters/"+id;
+        return "redirect:search/addchapters/"+id;
     }
 
 
@@ -94,7 +94,12 @@ public class BookSearch {
 
         bookDao.save(currentBook);
         model.addAttribute("book",currentBook);
-        return "search/bookview";
+
+        return "redirect:/book/"+currentBook.getId();
     }
+
+
+
+
 
 }
