@@ -15,6 +15,7 @@ public class Todo {
 //        put a check to prevent some one from going to addchapter view outside normal process
 //    also check on all controller and ensure no one can edit database out side normal operations
 //
+//    add bootstrap and css / beautify web app
 
 
 

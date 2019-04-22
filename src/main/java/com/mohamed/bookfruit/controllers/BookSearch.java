@@ -25,7 +25,6 @@ import java.util.Optional;
 @RequestMapping(value = "search")
 public class BookSearch {
 
-    AidFunctions aidFunctions = new AidFunctions();
     @Autowired
     private BookDao bookDao;
     @Autowired
@@ -80,6 +79,7 @@ public class BookSearch {
         return "search/addChapters";
     }
 
+
     @RequestMapping(value = "addchapters/{id}" , method = RequestMethod.POST)
     public String processAddChaptersForm(Model model, @RequestParam List<String> chapters, @PathVariable int id){
 
@@ -97,8 +97,6 @@ public class BookSearch {
 
         return "redirect:/book/"+currentBook.getId();
     }
-
-
 
 
 

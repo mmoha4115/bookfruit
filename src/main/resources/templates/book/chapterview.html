@@ -3,6 +3,24 @@
 <head th:replace="fragments :: head"></head>
 
 <body>
-<h1>Hahaha ready for fruits</h1>
+<h1>This is Chapter view</h1>
+<div>
+    <img th:src="@{${book.image}}"><br/>
+    <label>Book Title: <h1 th:text="${book.title}">Book Title</h1></label>
+    <label>Author: <h2 th:text="${book.author.name}">Author</h2></label>
+    <label>ISBN: <h3 th:text="${book.isbn13}">Isbn #</h3></label>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Fruit Title</th>
+            <th >Fruit </th>
+        </tr>
+        <tr th:each=" fruit : ${fruits}">
+            <td th:text="${fruit.title}">Fruit Title</td>
+            <td >  <a th:href="'/book/chapter/'+${book.id}+'/'+${chapterStat.index}" th:text="${fruit.fruit}">Fruit </a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -16,15 +16,19 @@ public class Fruit {
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Size(min = 1,max = 50)
+    private String title;
 
     @NotNull
-    @Size(min=1)
+    @Size(min=50)
     private long fruit;
 
     @ManyToOne
     private Chapter chapter;
 
-    public Fruit(long fruit, Chapter chapter){
+    public Fruit(String title, long fruit, Chapter chapter){
+        this.title = title;
         this.fruit = fruit;
         this.chapter = chapter;
     }
@@ -35,6 +39,14 @@ public class Fruit {
 
     public int getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public long getFruit() {

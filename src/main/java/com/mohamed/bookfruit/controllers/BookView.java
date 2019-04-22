@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping(value = "book")
 public class BookView {
 
-    AidFunctions aidFunctions = new AidFunctions();
     @Autowired
     private BookDao bookDao;
     @Autowired
@@ -45,7 +44,6 @@ public class BookView {
         model.addAttribute("fruits",book.getChapters().get(chapterid).getFruits());
         return "book/chapterview";
     }
-
 
 
 }
