@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<h1>This is Fruit view</h1>
+<div>
+    <img th:src="@{${book.image}}"><br/>
+    <label>Book Title: <h1 th:text="${book.title}">Book Title</h1></label>
+    <label>Author: <h2 th:text="${book.author.name}">Author</h2></label>
+    <label>ISBN: <h3 th:text="${book.isbn13}">Isbn #</h3></label>
+</div>
+<div>
+    <h2 th:text="${chapter.name">Chapter Title</h2>
+    <h1 th:text = "${fruit.title}">Fruit Title</h1>
+    <p th:text="${fruit.fruit}">Fruit</p>
+</div>
+<div>
+
+    comments section
+</div>
+<div>
+ add comment section / form
+</div>
+</body>
+</html>

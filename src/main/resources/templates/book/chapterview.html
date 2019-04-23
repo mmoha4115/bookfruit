@@ -16,11 +16,26 @@
             <th>Fruit Title</th>
             <th >Fruit </th>
         </tr>
+        <p >No Fruits :(</p>
         <tr th:each=" fruit : ${fruits}">
             <td th:text="${fruit.title}">Fruit Title</td>
-            <td >  <a th:href="'/book/chapter/'+${book.id}+'/'+${chapterStat.index}" th:text="${fruit.fruit}">Fruit </a></td>
+            <td >  <a th:href="'/book/chapter/'+${book.id}+'/'+${chapterStat.index}" th:text="${fruit.fruit}">Fruit </a>
+            </td>
         </tr>
     </table>
+</div>
+
+<br />
+<div>
+
+    <p>
+        <Strong>
+            A fruit is a lesson or an insight you gained from the chapter from your perspective and or
+            a memory in which is an example.
+        </Strong>
+        <a th:href="'/book/addfruit/'+${book.id}+'/'+${chapter.id}">Add a Fruit</a>
+    </p>
+
 </div>
 </body>
 </html>

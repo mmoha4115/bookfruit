@@ -45,6 +45,8 @@ public class BookSearch {
     public String processSearchForm(@ModelAttribute @Valid Book newBook, Model model,Errors errors,@RequestParam String authorname ){
         if (errors.hasErrors()){
             model.addAttribute("title","Search for a book by isbn #");
+            model.addAttribute(new Book());
+            model.addAttribute(new Author());
             return "search/index";
         }
         Author newAuthor=new Author(authorname);
@@ -75,6 +77,7 @@ public class BookSearch {
 
     @RequestMapping(value = "addchapters/{id}" , method=RequestMethod.GET)
     public String displayAddChapterForm(Model model, @PathVariable int id){
+        model.addAttribute("title","Add chapter to book");
         model.addAttribute("book",bookDao.findById(id).get());
         return "search/addChapters";
     }

@@ -16,6 +16,9 @@ public class Todo {
 //    also check on all controller and ensure no one can edit database out side normal operations
 //
 //    add bootstrap and css / beautify web app
+//    add return to chapter and return to book link to top of book and chapter views
+//    bootstrap for add fruit input and textarea sizes / mobile friendly
+//
 
 
 

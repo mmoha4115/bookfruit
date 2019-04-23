@@ -66,7 +66,7 @@
               $(".author").html(response.items[0].volumeInfo.authors[0]);
               $(".image").html(response.items[0].volumeInfo.imageLinks.smallThumbnail);
               $("#cover").attr("src",response.items[0].volumeInfo.imageLinks.smallThumbnail);
-              $( "#bookselection" ).append( "<input type='submit' value='SELECT' >" );
+              $( "#bookselection" ).append( "<input type='submit' value='SELECT' />" );
             }
           });
         }

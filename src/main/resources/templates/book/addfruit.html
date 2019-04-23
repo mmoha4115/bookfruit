@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<h1>This is addFruit view</h1>
+<div>
+    <img th:src="@{${book.image}}"><br/>
+    <label>Book Title: <h1 th:text="${book.title}">Book Title</h1></label>
+    <label>Author: <h2 th:text="${book.author.name}">Author</h2></label>
+    <label>ISBN: <h3 th:text="${book.isbn13}">Isbn #</h3></label>
+</div>
+
+<h2 th:text="${chapter.name}">Chapter title</h2>
+
+<div>
+    <form method="post"   th:object="${fruit}"   id="addfruit">
+            <div class="form-group ">
+                <label th:for="title">Title: </label><span class="title"></span>
+                <input  type="text" class="form-control" id="title" th:field="*{title}" />
+                <span th:errors="*{title}" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label th:for="fruit">Fruit: </label><span class="fruit"></span>
+                <textarea  rows="10" cols="50" id="fruit" form="addfruit" class="form-control"
+                           th:field="*{fruit}"  placeholder="A fruit is a lesson or an insight you gained from the chapter from your perspective and or a memory in which is an example." ></textarea>
+                <span th:errors="*{fruit}" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <input  type="hidden" class="form-control" th:value="${chapter}"   id="chapter" th:field="*{chapter}" />
+            </div>
+
+            <div>
+            <input type="submit" value="AddFruit" />
+            </div>
+    </form>
+</div>
+
+
+
+</body>
+</html>
