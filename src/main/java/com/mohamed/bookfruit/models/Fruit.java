@@ -22,12 +22,12 @@ public class Fruit {
 
     @NotNull
     @Size(min=50)
-    private long fruit;
+    private String fruit;
 
     @ManyToOne
     private Chapter chapter;
 
-    public Fruit(String title, long fruit, Chapter chapter){
+    public Fruit(String title, String fruit, Chapter chapter){
         this.title = title;
         this.fruit = fruit;
         this.chapter = chapter;
@@ -49,11 +49,11 @@ public class Fruit {
         this.title = title;
     }
 
-    public long getFruit() {
+    public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(long fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
     }
 
