@@ -27,6 +27,10 @@ public class Fruit {
     @ManyToOne
     private Chapter chapter;
 
+    @OneToMany
+    @JoinColumn(name = "fruit_id")
+    private List<Comment> comments;
+
     public Fruit(String title, String fruit, Chapter chapter){
         this.title = title;
         this.fruit = fruit;
@@ -66,4 +70,9 @@ public class Fruit {
     }
 
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    
 }
