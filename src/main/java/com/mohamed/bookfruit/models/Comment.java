@@ -1,8 +1,6 @@
 package com.mohamed.bookfruit.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,6 +8,7 @@ import javax.validation.constraints.Size;
  * Created by Mohamed Mohamed
  */
 
+@Entity
 public class Comment {
 
     @Id
@@ -36,6 +35,37 @@ public class Comment {
     public Comment(){
 
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
+    }
+
 
 
 }

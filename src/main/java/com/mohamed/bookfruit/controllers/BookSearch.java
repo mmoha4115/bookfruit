@@ -3,7 +3,6 @@ package com.mohamed.bookfruit.controllers;
 import com.mohamed.bookfruit.models.Author;
 import com.mohamed.bookfruit.models.Book;
 import com.mohamed.bookfruit.models.Chapter;
-import com.mohamed.bookfruit.models.data.AidFunctions;
 import com.mohamed.bookfruit.models.data.AuthorDao;
 import com.mohamed.bookfruit.models.data.BookDao;
 import com.mohamed.bookfruit.models.data.ChapterDao;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Mohamed Mohamed
@@ -74,7 +72,7 @@ public class BookSearch {
         return "redirect:search/addchapters/"+id;
     }
 
-
+// TODO = refactor to use a chapter object
     @RequestMapping(value = "addchapters/{id}" , method=RequestMethod.GET)
     public String displayAddChapterForm(Model model, @PathVariable int id){
         model.addAttribute("title","Add chapter to book");

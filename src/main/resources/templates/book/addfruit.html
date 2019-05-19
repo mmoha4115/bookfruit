@@ -15,7 +15,7 @@
 <h2 class="center" th:text="${chapter.name}">Chapter title</h2>
 <h3 class="center">Share A Fruit</h3>
 <div>
-    <form method="post"   th:object="${fruit}"   id="addfruit">
+    <form method="post"   th:object="${fruit}" >
 
             <div class="form-group ">
                 <label th:for="title">Title: </label><span class="title"></span>
@@ -24,9 +24,12 @@
             </div>
 
             <div class="form-group">
+                <!--TODO = text area is throwing conversion error and it is not catching empty field error -->
+                <p class="center" >A fruit is a lesson or an insight you gained from the chapter from your perspective and or a memory in which is an example.</p>
                 <label th:for="fruit">Fruit: </label><span class="fruit"></span>
-                <textarea  rows="10" cols="50" id="fruit" form="addfruit" class="form-control"
-                           th:field="*{fruit}"  placeholder="A fruit is a lesson or an insight you gained from the chapter from your perspective and or a memory in which is an example." ></textarea>
+                <textarea  rows="10" cols="50" id="fruit"  class="form-control"
+                           th:field="*{fruit}"  ></textarea>
+
                 <span th:errors="*{fruit}" class="error"></span>
             </div>
 
