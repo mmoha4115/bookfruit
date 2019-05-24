@@ -21,7 +21,7 @@ public class Fruit {
     private String title;
 
     @NotNull
-    @Size(min=50)
+    @Size(min=1)
     private String fruit;
 
     @ManyToOne

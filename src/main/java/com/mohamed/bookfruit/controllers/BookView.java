@@ -73,7 +73,7 @@ public class BookView {
         model.addAttribute("title","Add a fruit to "+currentChapter.getName());
         model.addAttribute(book);
         model.addAttribute("chapter",currentChapter);
-        model.addAttribute("fruit",new Fruit());
+        model.addAttribute("afruit",new Fruit());
         return "book/addfruit";
     }
 
